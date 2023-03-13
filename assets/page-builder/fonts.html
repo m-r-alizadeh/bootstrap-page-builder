@@ -1,0 +1,63 @@
+﻿
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Fonts</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">  
+    <style>
+@font-face {
+    font-family: 'iYekan';
+    src: url('fonts/iYekan.eot');
+    src: url('fonts/iYekan.eot?#iefix') format('embedded-opentype'),url('fonts/iYekan.woff2') format('woff2'),url('fonts/iYekan.woff') format('woff'),url('fonts/iYekan.ttf') format('truetype'),url('fonts/iYekan.svg#fontawesomeregular') format('svg');
+}
+        body {
+            font-family: 'iYekan',sans-serif;
+            font-size:100%; 
+            line-height:1.7;
+            direction:rtl;
+        }
+        #divFontList {margin:15px 0;padding:0 5px 0 7px;}
+        #divFontList div {width:100%;border:transparent 1px solid;cursor:pointer;overflow:hidden;text-align:center}
+        #divFontList div img {margin:7px 3px 0px 5px;height:21px}
+        #divFontList div:hover {
+             border: rgba(228, 156, 90, 0.6) solid 1px; 
+            /*border: rgba(0,0,0,0.7) solid 1px;*/
+            -webkit-transition: all 0.3s ease-in-out;
+            -moz-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+<div id="divFontList">
+
+<div data-provider="" data-font-family="" style="font-size:12px;padding:10px 7px;box-sizing:border-box;">پیش فرض(یکان)</div>
+<div data-provider="" data-font-family="Arial, sans-serif"><img src="images/fonts/arial.png"></div>
+<div data-provider="" data-font-family="Helvetica Neue, Helvetica, Arial, sans-serif"><img src="images/fonts/helvetica_neue.png"></div>
+<div data-provider="" data-font-family="Georgia, serif"><img src="images/fonts/georgia.png"></div>
+</div>
+
+<script src="js/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+
+        $("#divFontList div").click(function () {
+            window.parent.focus();
+            $('.md-pickfontfamily', window.parent.document).attr('data-font-family', $(this).data('font-family'));
+            var s = '';
+            if ($(this).data('font-style')) {
+                s = $(this).data('font-style');
+            } 
+            $('.md-pickfontfamily', window.parent.document).attr('data-font-style', s);
+            $('.md-pickfontfamily', window.parent.document).attr('data-provider', $(this).data('provider'));
+            $('.md-pickfontfamily', window.parent.document).click();
+        });
+
+    });
+
+</script>
+
+</body>
+</html>

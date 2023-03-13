@@ -1,0 +1,135 @@
+﻿
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Default</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content=""> 
+    
+    <link href="assets/page-builder/css/font-awesome.min.css" rel="stylesheet" />
+<link href="assets/page-builder/js/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Include the required css -->    
+    <link href="assets/page-builder/css/box.css" rel="stylesheet" type="text/css" />
+    <link href="assets/page-builder/css/content.css" rel="stylesheet" type="text/css" />
+    <!--
+    Include ContentBuilder.js and ContentBox.js (all js included before the body ends). -->
+    <link href="assets/page-builder/css/contentbuilder.css" rel="stylesheet" type="text/css" />
+    <link href="assets/page-builder/css/contentbox.css" rel="stylesheet" type="text/css" />
+
+    <style>
+        /* Bottom panel to place "Save" button */
+        .bottomBar {position:fixed;bottom:0;left:0;width:100%;height:57px;background:rgba(255,255,255,0.95);border-top:#eee 1px solid;;text-align:center;padding:10px 0 0;box-sizing:border-box;z-index:1000}
+        
+        /* Adjustment due to bottom panel */
+        .is-wrapper > div.is-section:nth-last-of-type(2) {margin-bottom: 57px;} 
+        @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) { /* for IE */
+            .is-wrapper > div:last-child {border-bottom:rgba(0,0,0,0) 57px solid;height:calc(100% - 0px);}
+        }
+        .is-wrapper > div.is-section-100 {height: -moz-calc(100% - 57px); height: -webkit-calc(100% - 57px); height: -o-calc(100% - 57px); height:calc(100% - 57px);} 
+                
+        .is-wrapper {display:none}
+    </style>        
+</head>
+<body>
+
+<div class="is-wrapper">
+
+    <!-- This is a sample content. You can load existing content from the database and place it in this area -->
+    <div class="is-section is-light-text is-box is-bg-grey is-section-100">
+		<div class="is-overlay">
+			<div class="is-overlay-bg" style="background-image: url(assets/page-builder/images/sample.jpg);"></div>
+			<div class="is-overlay-color"></div>
+			<div class="is-overlay-content"></div>
+		</div> 
+		<div class="is-boxes">
+			<div class="is-box-centered is-opacity-90">
+				<div class="is-container is-builder container is-content-980" id="contentareak8Pv6">
+                    <div class="row clearfix">
+                        <div class="column full">
+            				<div class="display">
+                				<h1 style="margin:0.2em 0">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم در صنعت چاپ است</h1>
+            				</div>
+							<p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم در صنعت چاپ است. 
+                            چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<div class="bottomBar">
+    <button id="btnAddSection" class="btn btn-primary">+ افزودن بخش</button>
+    <button id="btnViewHTML" class="btn btn-primary">HTML</button>
+    <button id="btnSave" class="btn btn-primary">ذخیره</button>
+</div>
+
+<script src="assets/page-builder/js/jquery.min.js" type="text/javascript"></script>  
+<script src="assets/page-builder/js/jquery-ui.min.js" type="text/javascript"></script>
+<script src="assets/page-builder/js/contentbuilder.js" type="text/javascript"></script>
+<script src="assets/page-builder/js/saveimages.js" type="text/javascript"></script>
+<script src="assets/page-builder/js/plugins.js"></script>
+<script src="assets/page-builder/js/contentbox.js" type="text/javascript"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        if (localStorage.getItem('mypage') != null) {
+            //Load saved content from localStorage (just for demo purpose. Normally you need to load saved content from database and place it directly inside div.is-wrapper above, not here)
+           // $(".is-wrapper").html(localStorage.getItem('mypage'));
+        }
+        $(".is-wrapper").css("display", "block");
+
+        //Call contentbox() to enable editing
+        $(".is-wrapper").contentbox({
+            snippetFile: 'assets/page-builder/snippets.html', /* Specify the snippets file */
+            snippetOpen: true,
+            coverImageHandler: 'savecover.php' /* for uploading section background */
+        });
+
+        //Call addSection() to add new section
+        $("#btnAddSection").click(function () {
+            $('.is-wrapper').data('contentbox').addSection();
+            return false;
+        });
+
+        //Call viewHtml() to view HTML
+        $("#btnViewHTML").click(function () {
+            $('.is-wrapper').data('contentbox').viewHtml();
+            return false;
+        });
+
+        $("#btnSave").click(function () {
+
+            var sHTML = $('.is-wrapper').data('contentbox').html();
+
+            //Save all base64 images into files on the server
+            //$("body").saveimages({
+            //    handler: 'saveimage.php', /* for saving embedded base64 image to image file */
+            //    onComplete: function () {
+
+            //        //Save Content
+
+            //        localStorage.setItem('mypage', sHTML);
+
+            //        //alert('Saved Successfully');
+
+            //        window.location.href = window.location.href; //reload page (optional/demo only)
+
+            //    }
+            //});
+
+            localStorage.setItem('mypage', sHTML);
+           // $("body").data('saveimages').save();
+
+         //   $("html").fadeOut(1000);
+
+            return false;
+        });
+    });
+</script>
+<script src="assets/page-builder/js/box.js" type="text/javascript"></script> <!-- Box Framework js include -->
+
+</body>
+</html>
